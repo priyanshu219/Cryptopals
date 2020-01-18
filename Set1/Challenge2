@@ -1,0 +1,14 @@
+import codecs
+
+buf1=input()
+buf2=input()
+
+buf1=codecs.decode(buf1, 'hex').decode()
+buf2=codecs.decode(buf2, 'hex').decode()
+
+length=len(buf2)
+result=''
+for i in range(0, length):
+	result+=hex(ord(buf1[i])^ord(buf2[i]))[2:]
+
+print (result)
