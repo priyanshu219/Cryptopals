@@ -35,8 +35,12 @@ def profile_for(emailid):
 	return encrypt_cookie(simple_cookie)
 
 if __name__ == '__main__':
+	# 0123456789ABCDEF 0123456789ABCDEF 0123456789ABCDEF
+	# user=aaaaaaaaaaa aaaa&uid=9&role= user     
 	profile_for(b'a'*14)
+	# user=aaaaaaaaaaa admin            &uid=9&role=user 
 	encrypted_admin = profile_for(b'a'*10+pkcs7_pad(b'admin', 16))[16:32]
+	# aaaaaaaaaaaadmin            
 	malicious = profile_for(b'a'*14)[:32] + encrypted_admin
 	print('Inputing malicious code')
 	decrypt_cookie(malicious)
